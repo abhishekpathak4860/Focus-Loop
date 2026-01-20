@@ -4,11 +4,12 @@
 generator client {
   provider      = "prisma-client-js"
   // Ye line add karein. Ye Prisma ko bolta hai ki Linux (Render) ke liye bhi ready raho
-  binaryTargets = ["native", "debian-openssl-1.1.x", "debian-openssl-3.0.x", "linux-musl", "linux-musl-openssl-3.0.x"]
+  binaryTargets = ["native", "debian-openssl-3.0.x"]
 }
 
 datasource db {
   provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 // Table 1: Stores User Info

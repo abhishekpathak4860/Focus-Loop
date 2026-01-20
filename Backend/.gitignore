@@ -2,6 +2,8 @@ node_modules
 .env
 .env.*
 /src/generated/prisma
+npm-cache/
+Backend/npm-cache/
 
 # Logs & Cache
 logs
