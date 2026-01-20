@@ -13,7 +13,6 @@ const generateTokens = (userId: number) => {
     { expiresIn: "15m" },
   );
 
-  // Refresh Token: Long life (e.g., 7 days) - Used to get new Access Token
   const refreshToken = jwt.sign(
     { userId },
     process.env.REFRESH_TOKEN_SECRET as string,
@@ -46,12 +45,6 @@ export const register = async (req: Request, res: Response): Promise<void> => {
         name,
       },
     });
-
-    /**
-     * NOTE: Generating tokens here means "Auto-Login".
-     * User doesn't need to enter password again right after signing up.
-     * This improves User Experience (UX).
-     */
 
     // 4. Generate Tokens
     const { accessToken, refreshToken } = generateTokens(user.id);
@@ -184,154 +177,3 @@ export const logout = (req: Request, res: Response): void => {
     res.status(500).json({ message: "Server error during logout" });
   }
 };
-
-// import { Request, Response } from "express";
-// import bcrypt from "bcrypt";
-// import jwt from "jsonwebtoken";
-// import prisma from "../utils/prisma";
-// import { VerifyErrors } from "jsonwebtoken";
-
-// // --- 1. COOKIE HELPER (Ye zaroori hai) ---
-// const getCookieOptions = () => {
-//   // Render environment variable check
-//   const isProduction = process.env.NODE_ENV === "production";
-
-//   return {
-//     httpOnly: true,
-//     // Production mein Secure hona zaroori hai
-//     secure: isProduction,
-//     // Production mein 'none' (Cross-site) hona zaroori hai
-//     sameSite: isProduction ? "none" : ("lax" as "none" | "lax"),
-//     maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
-//     path: "/",
-//   };
-// };
-
-// const generateTokens = (userId: number) => {
-//   const accessToken = jwt.sign(
-//     { userId },
-//     process.env.ACCESS_TOKEN_SECRET as string,
-//     { expiresIn: "15m" },
-//   );
-
-//   const refreshToken = jwt.sign(
-//     { userId },
-//     process.env.REFRESH_TOKEN_SECRET as string,
-//     { expiresIn: "7d" },
-//   );
-
-//   return { accessToken, refreshToken };
-// };
-
-// // --- REGISTER ---
-// export const register = async (req: Request, res: Response): Promise<void> => {
-//   try {
-//     const { email, password, name } = req.body;
-
-//     const existingUser = await prisma.user.findUnique({ where: { email } });
-//     if (existingUser) {
-//       res.status(400).json({ message: "User already exists" });
-//       return;
-//     }
-
-//     const hashedPassword = await bcrypt.hash(password, 10);
-//     const user = await prisma.user.create({
-//       data: { email, password: hashedPassword, name },
-//     });
-
-//     const { accessToken, refreshToken } = generateTokens(user.id);
-
-//     // Using Helper ensures consistent settings
-//     res.cookie("refreshToken", refreshToken, getCookieOptions());
-
-//     res.status(201).json({
-//       message: "User registered successfully",
-//       accessToken,
-//       user: { id: user.id, name: user.name, email: user.email },
-//     });
-//   } catch (error) {
-//     console.error("Registration Error:", error);
-//     res.status(500).json({ message: "Server error during registration" });
-//   }
-// };
-
-// // --- LOGIN ---
-// export const login = async (req: Request, res: Response): Promise<void> => {
-//   try {
-//     const { email, password } = req.body;
-//     const user = await prisma.user.findUnique({ where: { email } });
-
-//     if (!user) {
-//       res.status(400).json({ message: "Invalid credentials" });
-//       return;
-//     }
-
-//     const isMatch = await bcrypt.compare(password, user.password);
-//     if (!isMatch) {
-//       res.status(400).json({ message: "Invalid credentials" });
-//       return;
-//     }
-
-//     const { accessToken, refreshToken } = generateTokens(user.id);
-
-//     // Using Helper
-//     res.cookie("refreshToken", refreshToken, getCookieOptions());
-
-//     res.json({
-//       message: "Login successful",
-//       accessToken,
-//       user: { id: user.id, name: user.name, email: user.email },
-//     });
-//   } catch (error) {
-//     console.error("Login Error:", error);
-//     res.status(500).json({ message: "Server error during login" });
-//   }
-// };
-
-// // --- REFRESH TOKEN ---
-// export const refreshToken = async (
-//   req: Request,
-//   res: Response,
-// ): Promise<void> => {
-//   try {
-//     const refreshToken = req.cookies.refreshToken;
-
-//     if (!refreshToken) {
-//       res.status(401).json({ message: "No refresh token found" });
-//       return;
-//     }
-
-//     jwt.verify(
-//       refreshToken,
-//       process.env.REFRESH_TOKEN_SECRET as string,
-//       (err: VerifyErrors | null, decoded: any) => {
-//         if (err) {
-//           return res.status(403).json({ message: "Invalid refresh token" });
-//         }
-//         const accessToken = jwt.sign(
-//           { userId: decoded.userId },
-//           process.env.ACCESS_TOKEN_SECRET as string,
-//           { expiresIn: "15m" },
-//         );
-//         res.json({ accessToken });
-//       },
-//     );
-//   } catch (error) {
-//     console.error("Refresh Error:", error);
-//     res.status(500).json({ message: "Server error" });
-//   }
-// };
-
-// // --- LOGOUT ---
-// export const logout = (req: Request, res: Response): void => {
-//   try {
-//     // Helper use karne se delete options same match honge
-//     const { maxAge, ...logoutOptions } = getCookieOptions();
-
-//     res.clearCookie("refreshToken", logoutOptions);
-//     res.status(200).json({ message: "Logged out successfully" });
-//   } catch (error) {
-//     console.error("Logout Error:", error);
-//     res.status(500).json({ message: "Server error during logout" });
-//   }
-// };
