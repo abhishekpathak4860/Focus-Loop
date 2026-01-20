@@ -3,8 +3,8 @@
 // }
 generator client {
   provider      = "prisma-client-js"
-  // Ye line add karein. Ye Prisma ko bolta hai ki Linux (Render) ke liye bhi ready raho
-  binaryTargets = ["native", "debian-openssl-3.0.x"]
+  // Ye line Render (Linux) ke liye compulsory hai 
+  binaryTargets = ["native", "debian-openssl-3.0.x", "linux-musl-openssl-3.0.x"]
 }
 
 datasource db {

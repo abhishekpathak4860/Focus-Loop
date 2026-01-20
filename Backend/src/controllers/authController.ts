@@ -62,6 +62,7 @@ export const register = async (req: Request, res: Response): Promise<void> => {
       secure: process.env.NODE_ENV === "production",
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
       sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+      path: "/",
     });
 
     // 6. Respond with Success
@@ -108,6 +109,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
       secure: process.env.NODE_ENV === "production", // Production mein https zaroori hai
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
       sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+      path: "/",
     });
 
     // 5. Respond with Success & Access Token
@@ -173,6 +175,7 @@ export const logout = (req: Request, res: Response): void => {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+      path: "/",
     });
 
     res.status(200).json({ message: "Logged out successfully" });
