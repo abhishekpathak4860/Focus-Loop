@@ -9,6 +9,6 @@
     "strict": true,
     "skipLibCheck": true
   },
-  "include": ["app.ts", "src/**/*"],  /* app.ts + src folder ke andar ka maal */
+  "include": ["app.ts", "src/**/*", "prisma.config.ts"],  /* app.ts + src folder ke andar ka maal */
   "exclude": ["node_modules", "dist"]
 }
