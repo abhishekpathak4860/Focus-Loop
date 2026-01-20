@@ -1,0 +1,38 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Table 1: Stores User Info
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String // Hashed password
+  name      String?
+  createdAt DateTime @default(now())
+
+  // RELATION FIELD: This is Virtual. It does NOT create a column in the database.
+  // It is just a label for Prisma to understand the link to the Task table.
+  tasks Task[]
+}
+
+// Table 2: Stores Tasks (Linked to User via userId)
+model Task {
+  id          Int     @id @default(autoincrement())
+  title       String
+  description String?
+  status      String  @default("PENDING") // 'PENDING' or 'COMPLETED'
+
+  // This is the Foreign Key column that actually exists in the database
+  userId Int
+
+  // This tells Prisma: "The userId column above refers to the User table's id"
+  user User @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
