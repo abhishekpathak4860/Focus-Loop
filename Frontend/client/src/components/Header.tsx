@@ -41,7 +41,8 @@ export default function Header({ onMenuClick }: HeaderProps) {
           </p>
           <p className="text-xs text-gray-500">{user?.email || "No email"}</p>
         </div>
-        <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center border border-blue-200 text-blue-600 font-bold">
+        {/* UPDATED: Blue -> Teal Avatar */}
+        <div className="w-10 h-10 rounded-full bg-teal-50 flex items-center justify-center border border-teal-200 text-teal-700 font-bold shadow-sm">
           {user?.name ? user.name.charAt(0).toUpperCase() : "U"}
         </div>
       </div>

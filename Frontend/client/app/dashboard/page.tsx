@@ -42,7 +42,6 @@ export default function DashboardPage() {
     const fetchData = async () => {
       try {
         // Fetching with a high limit to calculate stats client-side as requested
-        // In a real large-scale app, you'd want a specific /stats endpoint
         const { data } = await api.get("/tasks?limit=100");
 
         const allTasks: Task[] = data.tasks;
@@ -82,7 +81,8 @@ export default function DashboardPage() {
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
         <div>
           <h1 className="text-2xl font-bold text-gray-800">
-            Welcome back, <span className="text-blue-600">{user?.name}</span>!
+            Welcome back, {/* UPDATED: Blue -> Teal */}
+            <span className="text-teal-600">{user?.name}</span>!
           </h1>
           <p className="text-gray-500 mt-1 flex items-center">
             <Calendar className="w-4 h-4 mr-2" /> {today}
@@ -90,7 +90,8 @@ export default function DashboardPage() {
         </div>
         <Link
           href="/dashboard/create-task"
-          className="flex items-center px-5 py-2.5 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors shadow-sm font-medium"
+          // UPDATED: Blue -> Teal
+          className="flex items-center px-5 py-2.5 bg-teal-600 text-white rounded-xl hover:bg-teal-700 transition-colors shadow-sm font-medium"
         >
           <Plus className="w-4 h-4 mr-2" /> Create New Task
         </Link>
@@ -98,51 +99,7 @@ export default function DashboardPage() {
 
       {/* 2. Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* Pending Card */}
-        <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-          <div className="flex justify-between items-start">
-            <div>
-              <p className="text-sm font-medium text-gray-500">Pending Tasks</p>
-              {loading ? (
-                <div className="h-8 w-16 bg-gray-200 animate-pulse rounded mt-1"></div>
-              ) : (
-                <h3 className="text-3xl font-bold text-gray-800 mt-1">
-                  {stats.pending}
-                </h3>
-              )}
-            </div>
-            <div className="p-3 bg-blue-50 rounded-xl text-blue-600">
-              <Clock className="w-6 h-6" />
-            </div>
-          </div>
-          <div className="mt-4 text-xs text-blue-600 font-medium bg-blue-50 inline-block px-2 py-1 rounded">
-            Tasks in progress
-          </div>
-        </div>
-
-        {/* Completed Card */}
-        <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-          <div className="flex justify-between items-start">
-            <div>
-              <p className="text-sm font-medium text-gray-500">Completed</p>
-              {loading ? (
-                <div className="h-8 w-16 bg-gray-200 animate-pulse rounded mt-1"></div>
-              ) : (
-                <h3 className="text-3xl font-bold text-gray-800 mt-1">
-                  {stats.completed}
-                </h3>
-              )}
-            </div>
-            <div className="p-3 bg-green-50 rounded-xl text-green-600">
-              <CheckCircle className="w-6 h-6" />
-            </div>
-          </div>
-          <div className="mt-4 text-xs text-green-600 font-medium bg-green-50 inline-block px-2 py-1 rounded">
-            Successfully finished
-          </div>
-        </div>
-
-        {/* Total Card */}
+        {/* Total Card - UPDATED: Purple -> Teal (Primary Brand Color) */}
         <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
           <div className="flex justify-between items-start">
             <div>
@@ -155,12 +112,56 @@ export default function DashboardPage() {
                 </h3>
               )}
             </div>
-            <div className="p-3 bg-purple-50 rounded-xl text-purple-600">
+            <div className="p-3 bg-teal-50 rounded-xl text-teal-600">
               <Activity className="w-6 h-6" />
             </div>
           </div>
-          <div className="mt-4 text-xs text-purple-600 font-medium bg-purple-50 inline-block px-2 py-1 rounded">
+          <div className="mt-4 text-xs text-teal-600 font-medium bg-teal-50 inline-block px-2 py-1 rounded">
             Lifetime created
+          </div>
+        </div>
+
+        {/* Pending Card - UPDATED: Blue -> Amber (To signify 'Waiting') */}
+        <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+          <div className="flex justify-between items-start">
+            <div>
+              <p className="text-sm font-medium text-gray-500">Pending Tasks</p>
+              {loading ? (
+                <div className="h-8 w-16 bg-gray-200 animate-pulse rounded mt-1"></div>
+              ) : (
+                <h3 className="text-3xl font-bold text-gray-800 mt-1">
+                  {stats.pending}
+                </h3>
+              )}
+            </div>
+            <div className="p-3 bg-amber-50 rounded-xl text-amber-600">
+              <Clock className="w-6 h-6" />
+            </div>
+          </div>
+          <div className="mt-4 text-xs text-amber-600 font-medium bg-amber-50 inline-block px-2 py-1 rounded">
+            Tasks in progress
+          </div>
+        </div>
+
+        {/* Completed Card - UPDATED: Green -> Emerald (Soothing Green) */}
+        <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+          <div className="flex justify-between items-start">
+            <div>
+              <p className="text-sm font-medium text-gray-500">Completed</p>
+              {loading ? (
+                <div className="h-8 w-16 bg-gray-200 animate-pulse rounded mt-1"></div>
+              ) : (
+                <h3 className="text-3xl font-bold text-gray-800 mt-1">
+                  {stats.completed}
+                </h3>
+              )}
+            </div>
+            <div className="p-3 bg-emerald-50 rounded-xl text-emerald-600">
+              <CheckCircle className="w-6 h-6" />
+            </div>
+          </div>
+          <div className="mt-4 text-xs text-emerald-600 font-medium bg-emerald-50 inline-block px-2 py-1 rounded">
+            Successfully finished
           </div>
         </div>
       </div>
@@ -176,7 +177,8 @@ export default function DashboardPage() {
               </h3>
               <Link
                 href="/dashboard/my-tasks"
-                className="text-sm text-blue-600 hover:underline flex items-center"
+                // UPDATED: Blue -> Teal
+                className="text-sm text-teal-600 hover:underline flex items-center"
               >
                 View All <ArrowRight className="w-4 h-4 ml-1" />
               </Link>
@@ -205,7 +207,11 @@ export default function DashboardPage() {
                     >
                       <div className="flex items-center gap-4">
                         <div
-                          className={`p-2 rounded-full ${task.status === "COMPLETED" ? "bg-green-100 text-green-600" : "bg-yellow-100 text-yellow-600"}`}
+                          className={`p-2 rounded-full ${
+                            task.status === "COMPLETED"
+                              ? "bg-emerald-100 text-emerald-600"
+                              : "bg-amber-100 text-amber-600"
+                          }`}
                         >
                           {task.status === "COMPLETED" ? (
                             <CheckCircle className="w-5 h-5" />
@@ -215,7 +221,11 @@ export default function DashboardPage() {
                         </div>
                         <div>
                           <h4
-                            className={`font-medium text-gray-800 ${task.status === "COMPLETED" ? "line-through text-gray-400" : ""}`}
+                            className={`font-medium text-gray-800 ${
+                              task.status === "COMPLETED"
+                                ? "line-through text-gray-400"
+                                : ""
+                            }`}
                           >
                             {task.title}
                           </h4>
@@ -227,8 +237,8 @@ export default function DashboardPage() {
                       <span
                         className={`text-xs font-semibold px-3 py-1 rounded-full ${
                           task.status === "COMPLETED"
-                            ? "bg-green-50 text-green-700"
-                            : "bg-yellow-50 text-yellow-700"
+                            ? "bg-emerald-50 text-emerald-700"
+                            : "bg-amber-50 text-amber-700"
                         }`}
                       >
                         {task.status}
@@ -243,17 +253,17 @@ export default function DashboardPage() {
 
         {/* Right Column: Quick Actions / Static Info (Takes up 1 col) */}
         <div className="space-y-6">
-          {/* Quick Stats / Productivity Tip */}
-          <div className="bg-gradient-to-br from-blue-600 to-indigo-700 rounded-2xl p-6 text-white shadow-lg">
+          {/* Quick Stats / Productivity Tip - UPDATED: Gradient from Teal to Emerald */}
+          <div className="bg-gradient-to-br from-teal-600 to-emerald-600 rounded-2xl p-6 text-white shadow-lg shadow-teal-900/10">
             <h3 className="font-bold text-lg mb-2">Productivity Tip</h3>
-            <p className="text-blue-100 text-sm leading-relaxed mb-4">
+            <p className="text-teal-50 text-sm leading-relaxed mb-4">
               "Start by doing what's necessary; then do what's possible; and
               suddenly you are doing the impossible."
             </p>
             <div className="h-1 bg-white/20 rounded-full w-full mb-2">
               <div className="h-1 bg-white rounded-full w-2/3"></div>
             </div>
-            <p className="text-xs text-blue-200">Daily Goal Progress</p>
+            <p className="text-xs text-teal-100">Daily Goal Progress</p>
           </div>
 
           {/* Quick Links Card */}
@@ -264,14 +274,16 @@ export default function DashboardPage() {
                 onClick={() =>
                   (window.location.href = "/dashboard/create-task")
                 }
-                className="w-full flex items-center p-3 text-sm font-medium text-gray-600 bg-gray-50 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors"
+                // UPDATED: Hover Blue -> Hover Teal
+                className="w-full flex items-center p-3 text-sm font-medium text-gray-600 bg-gray-50 hover:bg-teal-50 hover:text-teal-600 rounded-lg transition-colors"
               >
                 <Plus className="w-4 h-4 mr-3" /> Add New Task
               </button>
-              <button className="w-full flex items-center p-3 text-sm font-medium text-gray-600 bg-gray-50 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors">
+              <button className="w-full flex items-center p-3 text-sm font-medium text-gray-600 bg-gray-50 hover:bg-teal-50 hover:text-teal-600 rounded-lg transition-colors">
                 <Link
                   href="/dashboard/my-tasks"
-                  className="text-sm  text-gray-600 bg-gray-50 hover:bg-blue-50 hover:text-blue-600  flex items-center"
+                  // UPDATED: Hover Blue -> Hover Teal
+                  className="text-sm text-gray-600 w-full flex items-center"
                 >
                   <AlertCircle className="w-4 h-4 mr-3" /> View Pending Tasks
                 </Link>

@@ -71,10 +71,24 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    // UPDATED: bg-gray-50 -> bg-slate-50
+    <div className="min-h-screen bg-slate-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8 font-sans">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mx-auto">
-          <span className="text-white font-bold text-xl">T</span>
+        {/* UPDATED: Logo container to Teal theme */}
+        <div className="w-12 h-12 bg-teal-100 rounded-lg flex items-center justify-center mx-auto border border-teal-200">
+          {/* UPDATED: SVG Logo */}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            className="w-7 h-7 text-teal-600"
+          >
+            <path
+              fillRule="evenodd"
+              d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.36-1.814a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z"
+              clipRule="evenodd"
+            />
+          </svg>
         </div>
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
           Sign in to your account
@@ -83,7 +97,8 @@ export default function LoginPage() {
           Or{" "}
           <Link
             href="/register"
-            className="font-medium text-blue-600 hover:text-blue-500"
+            // UPDATED: Blue -> Teal text
+            className="font-medium text-teal-600 hover:text-teal-500 hover:underline transition-all"
           >
             create a new account
           </Link>
@@ -94,8 +109,8 @@ export default function LoginPage() {
         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
           {/* Error Message Display */}
           {serverError && (
-            <div className="mb-4 bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded text-sm">
-              {serverError}
+            <div className="mb-4 bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded text-sm flex items-center">
+              <span className="mr-2">⚠️</span> {serverError}
             </div>
           )}
 
@@ -113,9 +128,10 @@ export default function LoginPage() {
                   id="email"
                   type="email"
                   {...register("email")}
+                  // UPDATED: Blue focus -> Teal focus
                   className={`text-black appearance-none block w-full px-3 py-2 border ${
                     errors.email ? "border-red-300" : "border-gray-300"
-                  } rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm`}
+                  } rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-100 focus:border-teal-500 sm:text-sm transition-all`}
                 />
                 {errors.email && (
                   <p className="mt-1 text-sm text-red-600">
@@ -138,9 +154,10 @@ export default function LoginPage() {
                   id="password"
                   type="password"
                   {...register("password")}
+                  // UPDATED: Blue focus -> Teal focus
                   className={`text-black appearance-none block w-full px-3 py-2 border ${
                     errors.password ? "border-red-300" : "border-gray-300"
-                  } rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm`}
+                  } rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-100 focus:border-teal-500 sm:text-sm transition-all`}
                 />
                 {errors.password && (
                   <p className="mt-1 text-sm text-red-600">
@@ -155,7 +172,8 @@ export default function LoginPage() {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
+                // UPDATED: Blue -> Teal button with shadow
+                className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-lg shadow-md text-sm font-medium text-white bg-teal-600 hover:bg-teal-700 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
               >
                 {isLoading ? "Signing in..." : "Sign in"}
               </button>

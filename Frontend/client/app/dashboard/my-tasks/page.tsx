@@ -15,7 +15,7 @@ import {
   X,
   Save,
 } from "lucide-react";
-import toast from "react-hot-toast"; // <--- Import Toast
+import toast from "react-hot-toast";
 import api from "@/src/utils/api";
 
 // Types
@@ -180,7 +180,8 @@ export default function MyTasksPage() {
         </div>
         <Link
           href="/dashboard/create-task"
-          className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors shadow-sm"
+          // UPDATED: Blue -> Teal
+          className="flex items-center px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-colors shadow-sm"
         >
           <Plus className="w-4 h-4 mr-2" /> New Task
         </Link>
@@ -198,7 +199,8 @@ export default function MyTasksPage() {
               setSearch(e.target.value);
               setPage(1);
             }}
-            className="text-black w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-100 focus:border-blue-500 outline-none transition-all"
+            // UPDATED: Blue focus -> Teal focus
+            className="text-black w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-teal-100 focus:border-teal-500 outline-none transition-all"
           />
         </div>
         <div className="relative min-w-[200px]">
@@ -209,7 +211,8 @@ export default function MyTasksPage() {
               setStatusFilter(e.target.value);
               setPage(1);
             }}
-            className="text-black w-full pl-10 pr-8 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-100 focus:border-blue-500 outline-none appearance-none bg-white cursor-pointer"
+            // UPDATED: Blue focus -> Teal focus
+            className="text-black w-full pl-10 pr-8 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-teal-100 focus:border-teal-500 outline-none appearance-none bg-white cursor-pointer"
           >
             <option value="ALL">All Status</option>
             <option value="PENDING">Pending</option>
@@ -221,7 +224,8 @@ export default function MyTasksPage() {
       {/* 3. Task List Table */}
       <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
         {loading ? (
-          <div className="p-12 flex justify-center text-blue-600">
+          // UPDATED: Blue -> Teal
+          <div className="p-12 flex justify-center text-teal-600">
             <Loader2 className="w-8 h-8 animate-spin" />
           </div>
         ) : tasks.length === 0 ? (
@@ -265,9 +269,10 @@ export default function MyTasksPage() {
                     <td className="px-6 py-4 whitespace-nowrap">
                       <button
                         onClick={() => handleToggleStatus(task)}
+                        // UPDATED: Green/Yellow -> Emerald/Amber to fit theme
                         className={`flex items-center px-3 py-1 rounded-full text-xs font-medium border ${
                           task.status === "COMPLETED"
-                            ? "bg-green-50 text-green-700 border-green-200"
+                            ? "bg-emerald-50 text-emerald-700 border-emerald-200"
                             : "bg-yellow-50 text-yellow-700 border-yellow-200"
                         }`}
                       >
@@ -310,7 +315,8 @@ export default function MyTasksPage() {
                       <div className="flex items-center justify-end space-x-2">
                         <button
                           onClick={() => openEditModal(task)}
-                          className="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                          // UPDATED: Hover Blue -> Hover Teal
+                          className="p-2 text-gray-400 hover:text-teal-600 hover:bg-teal-50 rounded-lg transition-colors"
                         >
                           <Edit className="w-4 h-4" />
                         </button>
@@ -383,7 +389,8 @@ export default function MyTasksPage() {
                   onChange={(e) =>
                     setEditForm({ ...editForm, title: e.target.value })
                   }
-                  className="text-black w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-100 focus:border-blue-500 outline-none"
+                  // UPDATED: Blue focus -> Teal focus
+                  className="text-black w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-100 focus:border-teal-500 outline-none"
                   required
                 />
               </div>
@@ -396,7 +403,8 @@ export default function MyTasksPage() {
                   onChange={(e) =>
                     setEditForm({ ...editForm, status: e.target.value as any })
                   }
-                  className="text-black w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-100 focus:border-blue-500 outline-none bg-white"
+                  // UPDATED: Blue focus -> Teal focus
+                  className="text-black w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-100 focus:border-teal-500 outline-none bg-white"
                 >
                   <option value="PENDING">Pending</option>
                   <option value="COMPLETED">Completed</option>
@@ -412,7 +420,8 @@ export default function MyTasksPage() {
                   onChange={(e) =>
                     setEditForm({ ...editForm, description: e.target.value })
                   }
-                  className="text-black w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-100 focus:border-blue-500 outline-none resize-none"
+                  // UPDATED: Blue focus -> Teal focus
+                  className="text-black w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-100 focus:border-teal-500 outline-none resize-none"
                 />
               </div>
               <div className="flex justify-end gap-3 pt-2">
@@ -425,7 +434,8 @@ export default function MyTasksPage() {
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 text-sm text-white bg-blue-600 hover:bg-blue-700 rounded-lg flex items-center gap-2 shadow-sm"
+                  // UPDATED: Blue -> Teal
+                  className="px-4 py-2 text-sm text-white bg-teal-600 hover:bg-teal-700 rounded-lg flex items-center gap-2 shadow-sm"
                 >
                   <Save className="w-4 h-4" /> Save Changes
                 </button>
