@@ -12,7 +12,11 @@ const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
 app.use(cookieParser());
-const allowedOrigins = ["http://localhost:3000", process.env.FRONTEND_URL];
+app.set("trust proxy", 1);
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://focus-loop-gamma.vercel.app",
+];
 app.use(
   cors({
     origin: (origin, callback) => {
