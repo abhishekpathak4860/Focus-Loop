@@ -2,13 +2,13 @@
   "compilerOptions": {
     "target": "es2016",
     "module": "commonjs",
-    "rootDir": "./",
-    "outDir": "./dist",
+    "rootDir": "./",               /* Root is the backend folder itself */
+    "outDir": "./dist",             /* Output goes to dist */
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "skipLibCheck": true
   },
-  "include": ["src/**/*", "prisma.config.ts"],
+  "include": ["app.ts", "src/**/*"],  /* app.ts + src folder ke andar ka maal */
   "exclude": ["node_modules", "dist"]
 }
