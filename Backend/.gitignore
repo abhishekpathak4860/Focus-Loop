@@ -1,29 +1,19 @@
-# Dependencies
 node_modules
-
-# Environment variables
 .env
 .env.*
-
-# Prisma generated files
 /src/generated/prisma
 
-# Logs
+# Logs & Cache
 logs
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-lerna-debug.log*
 .pnpm-debug.log*
-
-# OS junk
-.DS_Store
-
-# Editors
-.vscode
-.idea
-
-# npm cache (As requested)
 .npm
 .eslintcache
+
+# OS
+.DS_Store
+.vscode
+.idea
