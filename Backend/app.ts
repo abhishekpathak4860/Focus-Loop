@@ -12,10 +12,7 @@ const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
 app.use(cookieParser());
-const allowedOrigins = [
-  "http://localhost:3000",
-  process.env.FRONTEND_URL as string,
-];
+const allowedOrigins = ["http://localhost:3000", process.env.FRONTEND_URL];
 app.use(
   cors({
     origin: (origin, callback) => {
