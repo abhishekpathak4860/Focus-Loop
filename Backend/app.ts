@@ -40,6 +40,16 @@ app.get("/", (req, res) => {
 app.use("/auth", authRoutes);
 app.use("/tasks", taskRoutes);
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+// app.listen(PORT, () => {
+//   console.log(`Server running on port ${PORT}`);
+// });
+
+if (process.env.NODE_ENV !== "production") {
+  const PORT = process.env.PORT || 5000;
+  app.listen(PORT, () => {
+    console.log(`Server running locally on port ${PORT}`);
+  });
+}
+
+//  VERY IMPORTANT: Vercel ke liye app export karna zaroori hai
+export default app;
